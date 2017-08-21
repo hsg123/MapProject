@@ -122,4 +122,4 @@ var ViewModel = function() {
         });
         return filtered;
     }, this);
-}
+};
