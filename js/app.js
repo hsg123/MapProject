@@ -4,6 +4,8 @@ var markers = [];
 
 // Function to initialize the map within the map div
 function initMap() {
+  var infowindow = new google.maps.InfoWindow();
+
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
             lat: -37.814251,
@@ -68,25 +70,24 @@ function initMap() {
                         marker.setAnimation(undefined);
                     } else {
                         marker.setAnimation(google.maps.Animation.BOUNCE);
-                        var infowindow = new google.maps.InfoWindow();
+                        setTimeout(function(){ marker.setAnimation(null); }, 750);
+
                         infowindow.marker = marker;
                         infowindow.setContent('<div>' + marker.title + '</br>Indoor Seats: ' + marker.indoorSeats + '</br>Outdoor Seats: ' + marker.outdoorSeats + '</div>');
                         infowindow.open(map, marker);
                         // Make sure the marker property is cleared if the infowindow is closed.
                         infowindow.addListener('closeclick', function() {
-                            infowindow.setMarker = null;
+                            //infowindow.setMarker = null;
+                            infowindow.close();
                         });
                     }
                 });
-
                 markers.push(marker);
             }
-
-
         });
         ko.applyBindings(new ViewModel()); //bind only after we loaded the dada
     }).fail(function(data) {
-        alert("Could not load data! Try refreshing. " + data.responseJSON.message);
+        alert("Could not load data! Try refreshing.");
     });
 }
 
@@ -97,16 +98,6 @@ var ViewModel = function() {
     var self = this;
     this.filter = ko.observable("");
 
-    //when the listview is clicked we need to trigger the event on the marker that was clicked
-    $('#listView').click(function(event) {
-        for (var i = 0; i < markers.length; i++) {
-            if (markers[i].title === $(event.target).text()) { //if marker's title equal to list element clicked
-                new google.maps.event.trigger(markers[i], 'click');
-                break;
-            }
-        }
-    });
-
     //returns filtered list to view. Also updates maps to show only filtered markers
     this.returnedLocations = ko.computed(function() {
         var filtered = [];
@@ -115,11 +106,24 @@ var ViewModel = function() {
             var title = marker.title;
             if (filter === "" || title.includes(filter)) {
                 filtered.push(title);
-                marker.setMap(map);
+                marker.setVisible(true);
             } else {
-                marker.setMap(null); //remove marker from map
+              marker.setVisible(false);
             }
         });
         return filtered;
     }, this);
+
+    self.selectLocation = function(location) {
+      for (var i = 0; i < markers.length; i++) {
+          if (markers[i].title ===location) { //if marker's title equal to list element clicked
+              new google.maps.event.trigger(markers[i], 'click');
+              break;
+          }
+      }
+    }
 };
+
+function googleMapErrorHandling(){
+  alert("Google API could not load. Try refreshing");
+}

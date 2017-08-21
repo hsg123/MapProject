@@ -15,14 +15,14 @@
         <div id="list">
             <input id="filter" data-bind="textInput: filter" />
             <ul id="listView" data-bind="foreach: returnedLocations">
-                <li class="listItem" data-bind="text: $data"></li>
+                <li class="listItem" data-bind="text: $data, click: $parent.selectLocation"  ></li>
             </ul>
         </div>
         <div id="map"></div>
         <script src="js/lib/knockout-3.2.0.js"></script>
         <script src="js/lib/jquery.min.js"></script>
         <script src="js/app.js"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyApmsOUy8Al5PUF0bpuII8aXYgnCHaN8qk&callback=initMap">
+        <script onerror="googleMapErrorHandling()"  async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyApmsOUy8Al5PUF0bpuII8aXYgnCHaN8qk&callback=initMap">
         </script>
     </div>
 </body>
