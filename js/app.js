@@ -121,7 +121,7 @@ var ViewModel = function() {
               break;
           }
       }
-    }
+    };
 };
 
 function googleMapErrorHandling(){
