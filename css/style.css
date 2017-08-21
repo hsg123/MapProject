@@ -8,26 +8,32 @@
     -ms-box-sizing: border-box;
     box-sizing: border-box;
 }
-
-html, body { height: 100%; margin: 0; padding: 0; }
-
-
-#pageApp{
-  height: 100%;
-  display:flex;
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
-
+#pageApp {
+    height: 100%;
+    display: flex;
+}
 #map {
-  height: 100%;
-  width: 70%;
+    height: 100%;
+    width: 70%;
 }
-
-#list{
-  height: 100%;
+#list {
+    height: 100%;
     width: 30%;
-    overflow:auto;
+    overflow: auto;
 }
-
-#filter{
-  width: 100%;
+#listView {
+    list-style: none;
+    background-color: gray;
+    margin: 0;
+}
+#filter {
+    width: 100%;
+    height: 30px;
+    background-color: antiquewhite;
 }

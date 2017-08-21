@@ -3,7 +3,7 @@
 
 ## Launching
 
-The site is launched by simply opening the index.html in your preferred web browser which will lead to the app.
+The site is launched by simply opening the index.html in your preferred web browser which will lead to the app. The Left side is for the filter box and the listview. The right is the map. Enter text into the textbox on the left to filter the markers on the map.
 
 ## Data Source
 
